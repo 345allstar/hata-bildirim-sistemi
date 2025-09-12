@@ -31,16 +31,6 @@
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
                     <img src="https://placehold.co/250x60/f8f9fa/0A2C6E?text=ÜçDörtBeş+ALL+STAR&font=inter" alt="All Star Logo" class="h-10">
-                    <nav class="hidden md:flex ml-10 space-x-4">
-                        <a href="#" id="nav-video" onclick="showPage('video')" class="flex items-center px-4 py-2 rounded-md font-medium transition-colors">
-                            <i class="fas fa-video mr-2"></i>
-                            <span>Video Hata Bildirimi</span>
-                        </a>
-                        <a href="#" id="nav-kitap" onclick="showPage('kitap')" class="flex items-center px-4 py-2 rounded-md font-medium transition-colors">
-                            <i class="fas fa-book mr-2"></i>
-                            <span>Kitap Hata Bildirimi</span>
-                        </a>
-                    </nav>
                 </div>
                 <div class="flex items-center">
                     <button class="p-2 rounded-full text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -59,6 +49,19 @@
             </div>
         </div>
     </header>
+
+    <div class="max-w-7xl mx-auto mb-6 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-lg shadow-sm p-2 flex space-x-2">
+            <a href="#" id="nav-video" onclick="showPage('video')" class="flex-1 text-center px-4 py-2 rounded-md font-medium transition-colors">
+                <i class="fas fa-video mr-1 sm:mr-2"></i>
+                <span>Video Hata Bildirimi</span>
+            </a>
+            <a href="#" id="nav-kitap" onclick="showPage('kitap')" class="flex-1 text-center px-4 py-2 rounded-md font-medium transition-colors">
+                <i class="fas fa-book mr-1 sm:mr-2"></i>
+                <span>Kitap Hata Bildirimi</span>
+            </a>
+        </div>
+    </div>
 
     <main class="max-w-7xl mx-auto">
         <div id="video-page-container">
@@ -418,7 +421,7 @@
                 ogretmen: document.getElementById('video-ogretmen'), hata_icerigi: document.getElementById('video-hata-icerigi'), hata_suresi: document.getElementById('video-hata-suresi'),
                 hata_alani: document.getElementById('video-hata-alani'), tarih: document.getElementById('video-tarih'), hata_bildiren: document.getElementById('video-hata-bildiren'),
                 durumu: document.getElementById('video-durumu'),
-                yorum_sonuc: document.getElementById('video-yorum-sonuc') // YENİ ALAN EKLENDİ
+                yorum_sonuc: document.getElementById('video-yorum-sonuc')
             };
             
             function clearVideoForm() {
@@ -457,7 +460,7 @@
                 brans: document.getElementById('kitap-brans'), kitap_no: document.getElementById('kitap-no'), kitap_turu: document.getElementById('kitap-turu'),
                 sayfa_no: document.getElementById('kitap-sayfa-no'), hata_icerigi: document.getElementById('kitap-hata-icerigi'), hata_bildiren: document.getElementById('kitap-hata-bildiren'),
                 tarih: document.getElementById('kitap-tarih'), durumu: document.getElementById('kitap-durumu'),
-                yorum_sonuc: document.getElementById('kitap-yorum-sonuc') // YENİ ALAN EKLENDİ
+                yorum_sonuc: document.getElementById('kitap-yorum-sonuc')
             };
 
             function clearKitapForm() {
@@ -645,7 +648,7 @@
             document.getElementById('video-hata-suresi').value = item.hata_suresi || '';
             document.getElementById('video-hata-alani').value = item.hata_alani || '';
             document.getElementById('video-hata-icerigi').value = item.hata_icerigi || '';
-            document.getElementById('video-yorum-sonuc').value = item.yorum_sonuc || ''; // YENİ ALAN EKLENDİ
+            document.getElementById('video-yorum-sonuc').value = item.yorum_sonuc || '';
             document.getElementById('video-unite-adi-arama').value = item.unite_adi || '';
             document.getElementById('video-test-no-arama').value = item.test_no || '';
             filterSelectOptions('video-unite-adi-arama', 'video-unite-adi');
@@ -731,12 +734,13 @@
                     }
                 }
                 row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${item.brans || ''}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.unite_adi || ''}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${item.hata_bildiren || ''}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formattedDate}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.yorum_sonuc || '-'}</td> <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.brans || ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.unite_adi || ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.hata_bildiren || ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${formattedDate}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.yorum_sonuc || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm font-medium">
                         <button onclick="showVideoDetails(${originalIndex})" class="text-indigo-600 hover:text-indigo-900 mr-4">Detay</button>
                         <button onclick="deleteVideoItem(${originalIndex})" class="text-red-600 hover:text-red-900">Sil</button>
                     </td>`;
@@ -745,7 +749,7 @@
         }
         function populateSelectWithOptions(selectElementId, optionsArray) {
             const selectElement = document.getElementById(selectElementId);
-            if (!selectElement.options.length > 1) { // Eğer seçenekler zaten eklenmemişse ekle
+            if (!selectElement.options.length > 1) { 
                 optionsArray.forEach(optionText => {
                     const option = document.createElement('option');
                     option.value = optionText;
@@ -777,7 +781,7 @@
             document.getElementById('kitap-tarih').value = item.tarih || '';
             document.getElementById('kitap-durumu').value = item.durumu || '';
             document.getElementById('kitap-hata-icerigi').value = item.hata_icerigi || '';
-            document.getElementById('kitap-yorum-sonuc').value = item.yorum_sonuc || ''; // YENİ ALAN EKLENDİ
+            document.getElementById('kitap-yorum-sonuc').value = item.yorum_sonuc || '';
             const previewContainer = document.getElementById('kitap-gorsel-preview-container');
             const previewImage = document.getElementById('kitap-gorsel-preview');
             if (item.gorsel) {
@@ -861,18 +865,19 @@
                 const originalIndex = kitapHataData.findIndex(originalItem => originalItem.id === item.id);
                 const row = document.createElement('tr');
                 let formattedDate = item.tarih ? `${item.tarih.split('-')[2]}-${item.tarih.split('-')[1]}-${item.tarih.split('-')[0]}` : "Tarih Girilmemiş";
-                let gorselCell = '<td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">-</td>';
+                let gorselCell = '<td class="px-4 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">-</td>';
                 if(item.gorsel){
                     gorselCell = `<td class="px-4 py-4"><img src="${item.gorsel}" alt="hata görseli" class="h-10 w-10 object-cover rounded cursor-pointer" onclick="openImageModal('${item.gorsel}')"></td>`;
                 }
                 row.innerHTML = `
                     ${gorselCell}
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${item.brans || ''}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.kitap_no || ''}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${item.hata_bildiren || ''}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${formattedDate}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${item.yorum_sonuc || '-'}</td> <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.brans || ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.kitap_no || ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.hata_bildiren || ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${formattedDate}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.yorum_sonuc || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button onclick="showKitapDetails(${originalIndex})" class="text-indigo-600 hover:text-indigo-900 mr-4">Detay</button>
                         <button onclick="deleteKitapItem(${originalIndex})" class="text-red-600 hover:text-red-900">Sil</button>
                     </td>`;
