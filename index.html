@@ -9,19 +9,74 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
-        .form-input { width: 100%; padding: 0.5rem; border: 1px solid #D1D5DB; border-radius: 0.375rem; background-color: #fff; transition: border-color 0.2s; }
-        .form-input:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 1px #2563EB; }
-        .form-label { font-size: 0.875rem; font-weight: 500; color: #4B5563; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1.25rem; background-color: #2563EB; color: white; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; cursor: pointer; }
-        .card-header h2 { font-size: 1rem; font-weight: 600; }
-        .rotate-180 { transform: rotate(180deg); }
-        .transition-transform { transition: transform 0.3s ease-in-out; }
-        .pagination-btn { padding: 0.5rem 1rem; border: 1px solid #D1D5DB; background-color: white; color: #374151; font-weight: 500; border-radius: 0.375rem; cursor: pointer; transition: background-color 0.2s; }
-        .pagination-btn:hover { background-color: #F3F4F6; }
-        .pagination-btn.active { background-color: #2563EB; color: white; border-color: #2563EB; }
-        .pagination-btn:disabled { cursor: not-allowed; opacity: 0.5; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+            -webkit-appearance: none;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            background-color: #fff;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 1px #2563EB;
+        }
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4B5563;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            background-color: #2563EB;
+            color: white;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            cursor: pointer;
+        }
+        .card-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        .transition-transform {
+            transition: transform 0.3s ease-in-out;
+        }
+        .pagination-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #D1D5DB;
+            background-color: white;
+            color: #374151;
+            font-weight: 500;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .pagination-btn:hover {
+            background-color: #F3F4F6;
+        }
+        .pagination-btn.active {
+            background-color: #2563EB;
+            color: white;
+            border-color: #2563EB;
+        }
+        .pagination-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body class="bg-gray-100 p-4 lg:p-8">
@@ -61,16 +116,329 @@
     </header>
 
     <main class="max-w-7xl mx-auto">
-        </main>
+
+        <div id="video-page-container">
+            <div class="bg-white shadow rounded-lg mb-6">
+                <div class="card-header" onclick="toggleCard('videoGiris')">
+                    <h2><i class="fas fa-video mr-2"></i>Video Hata Bildirim Girişi</h2>
+                    <i id="videoGiris-icon" class="fas fa-chevron-down transition-transform"></i>
+                </div>
+                <div id="videoGiris-body" class="p-5 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4">
+                        <input type="hidden" id="video-edit-index">
+                        <div>
+                            <label for="video-anlatim-turu" class="form-label">Anlatım Türü</label>
+                            <select id="video-anlatim-turu" class="form-input">
+                                <option value="">Seçiniz</option>
+                                <option>Tabletli Anlatım</option>
+                                <option>Özet Anlatım</option>
+                                <option>Eğlenceli Anlatım</option>
+                                <option>Soru Pratiği</option>
+                                <option>GGÇK</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="video-brans" class="form-label">Branş</label>
+                            <select id="video-brans" class="form-input">
+                                <option value="">Seçiniz</option>
+                                <option>LGS Türkçe</option>
+                                <option>LGS Matematik</option>
+                                <option>LGS Fen Bilimleri</option>
+                                <option>LGS İnkılap Tarihi ve Atatürkçülük</option>
+                                <option>LGS İngilizce</option>
+                                <option>LGS Din Kültürü</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="video-unite-adi-arama" class="form-label">Ünite Adı</label>
+                            <input type="text" id="video-unite-adi-arama" class="form-input mb-2" placeholder="Ünite ara...">
+                            <select id="video-unite-adi" class="form-input h-[42px]" size="1">
+                                 <option value="">Seçiniz</option>
+                            </select>
+                        </div>
+                         <div>
+                            <label for="video-ogretmen" class="form-label">Öğretmen</label>
+                             <select id="video-ogretmen" class="form-input">
+                                <option value="">Seçiniz</option>
+                                <option>Rüştü Bayındır</option>
+                                <option>Kadir Sefi</option>
+                                <option>Melih Akgündüz</option>
+                                <option>İbrahim Taş</option>
+                                <option>Yaşar Aslan</option>
+                                <option>Mehmet Özalp</option>
+                                <option>İlayda Gültekin</option>
+                                <option>Fatih Sefi</option>
+                                <option>Buğra Arslan</option>
+                                <option>Serkan Yeşilkan</option>
+                                <option>Cebrail Karaoğlan</option>
+                                <option>Enise Özdemir</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="video-bolum-no" class="form-label">Bölüm No</label>
+                            <select id="video-bolum-no" class="form-input">
+                                <option value="">Seçiniz</option>
+                                <option>1. Bölüm</option><option>2. Bölüm</option><option>3. Bölüm</option><option>4. Bölüm</option><option>5. Bölüm</option>
+                                <option>6. Bölüm</option><option>7. Bölüm</option><option>8. Bölüm</option><option>9. Bölüm</option><option>10. Bölüm</option>
+                                <option>11. Bölüm</option><option>12. Bölüm</option><option>13. Bölüm</option><option>14. Bölüm</option><option>15. Bölüm</option>
+                                <option>16. Bölüm</option><option>17. Bölüm</option><option>18. Bölüm</option><option>19. Bölüm</option><option>20. Bölüm</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="video-test-no-arama" class="form-label">Test No</label>
+                            <input type="text" id="video-test-no-arama" class="form-input mb-2" placeholder="Test ara...">
+                            <select id="video-test-no" class="form-input h-[42px]" size="1">
+                                 <option value="">Seçiniz</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="video-ders-no" class="form-label">Ders No</label>
+                            <select id="video-ders-no" class="form-input">
+                                <option value="">Seçiniz</option>
+                                <option>1. Ders</option><option>2. Ders</option><option>3. Ders</option><option>4. Ders</option><option>5. Ders</option>
+                                <option>6. Ders</option><option>7. Ders</option><option>8. Ders</option><option>9. Ders</option><option>10. Ders</option>
+                                <option>11. Ders</option><option>12. Ders</option><option>13. Ders</option><option>14. Ders</option><option>15. Ders</option>
+                                <option>16. Ders</option><option>17. Ders</option><option>18. Ders</option><option>19. Ders</option><option>20. Ders</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="video-hata-bildiren" class="form-label">Hata Bildiren</label>
+                            <input type="text" id="video-hata-bildiren" class="form-input">
+                        </div>
+                        <div class="relative">
+                            <label for="video-tarih" class="form-label">Tarih</label>
+                            <input type="date" id="video-tarih" class="form-input">
+                            <i class="fas fa-calendar absolute right-3 top-9 text-gray-400"></i>
+                        </div>
+                         <div>
+                            <label for="video-durumu" class="form-label">Durumu</label>
+                            <select id="video-durumu" class="form-input">
+                                <option>Bildirildi</option><option>İnceleniyor</option><option>Düzeltildi</option><option>Reddedildi</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="video-hata-suresi" class="form-label">Hata Süresi</label>
+                            <input type="text" id="video-hata-suresi" class="form-input" placeholder="Örn: 01:23-01:45">
+                        </div>
+                        <div>
+                            <label for="video-hata-alani" class="form-label">Hata Alanı</label>
+                            <select id="video-hata-alani" class="form-input">
+                                <option value="">Seçiniz</option><option>Akademik</option><option>Teknik</option>
+                            </select>
+                        </div>
+                         <div class="md:col-span-2 lg:col-span-4">
+                            <label for="video-hata-icerigi" class="form-label">Hata İçeriği</label>
+                            <textarea id="video-hata-icerigi" rows="3" class="form-input" placeholder="Lütfen hatayı detaylı olarak açıklayınız..."></textarea>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-2">
+                        <button id="video-kaydet-btn" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors mr-2">Kaydet</button>
+                        <button id="video-iptal-btn" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 transition-colors">İptal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white shadow rounded-lg">
+                 <div class="card-header" onclick="toggleCard('videoDetay')">
+                    <h2><i class="fas fa-list-ul mr-2"></i>Video Hata Bildirim Listesi</h2>
+                    <i id="videoDetay-icon" class="fas fa-chevron-down transition-transform"></i>
+                </div>
+                <div id="videoDetay-body" class="p-5 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6 p-4 border rounded-lg bg-gray-50">
+                        <div>
+                            <label for="video-filter-brans" class="form-label">Branşa Göre</label>
+                            <select id="video-filter-brans" class="form-input text-sm" onchange="filterVideoTable(true)">
+                                <option value="">Tümü</option><option>LGS Türkçe</option><option>LGS Matematik</option><option>LGS Fen Bilimleri</option><option>LGS İnkılap Tarihi ve Atatürkçülük</option><option>LGS İngilizce</option><option>LGS Din Kültürü</option>
+                            </select>
+                        </div>
+                        <div>
+                             <label for="video-filter-anlatim-turu" class="form-label">Anlatım Türüne Göre</label>
+                             <select id="video-filter-anlatim-turu" class="form-input text-sm" onchange="filterVideoTable(true)">
+                                <option value="">Tümü</option><option>Tabletli Anlatım</option><option>Özet Anlatım</option><option>Eğlenceli Anlatım</option><option>Soru Pratiği</option><option>GGÇK</option>
+                            </select>
+                        </div>
+                        <div>
+                             <label for="video-filter-hata-alani" class="form-label">Hata Alanına Göre</label>
+                             <select id="video-filter-hata-alani" class="form-input text-sm" onchange="filterVideoTable(true)">
+                                <option value="">Tümü</option><option>Akademik</option><option>Teknik</option>
+                            </select>
+                        </div>
+                        <div>
+                             <label for="video-filter-durumu" class="form-label">Duruma Göre</label>
+                             <select id="video-filter-durumu" class="form-input text-sm" onchange="filterVideoTable(true)">
+                                <option value="">Tümü</option><option>Bildirildi</option><option>İnceleniyor</option><option>Düzeltildi</option><option>Reddedildi</option>
+                            </select>
+                        </div>
+                         <div class="lg:col-span-1">
+                            <label for="video-filter-genel-arama" class="form-label">Genel Arama</label>
+                            <input type="text" id="video-filter-genel-arama" class="form-input text-sm" placeholder="Listede ara..." onkeyup="filterVideoTable(true)">
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Branş</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ünite Adı</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Öğretmen</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hata Süresi</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hata Alanı</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hata Bildiren</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarih</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durumu</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="video-hataTableBody" class="bg-white divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                      <div id="video-pagination-container" class="mt-4 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600">
+                        <span id="video-record-count" class="mb-2 sm:mb-0"></span>
+                        <div id="video-pagination-controls" class="flex items-center space-x-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="kitap-page-container" class="hidden">
+            <div class="bg-white shadow rounded-lg mb-6">
+                <div class="card-header" onclick="toggleCard('kitapGiris')">
+                    <h2><i class="fas fa-book mr-2"></i>Kitap Hata Bildirim Girişi</h2>
+                    <i id="kitapGiris-icon" class="fas fa-chevron-down transition-transform"></i>
+                </div>
+                <div id="kitapGiris-body" class="p-5 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                         <input type="hidden" id="kitap-edit-index">
+                        <div>
+                            <label for="kitap-brans" class="form-label">Branş</label>
+                            <select id="kitap-brans" class="form-input">
+                                <option value="">Seçiniz</option><option>LGS Türkçe</option><option>LGS Matematik</option><option>LGS Fen Bilimleri</option><option>LGS İnkılap Tarihi ve Atatürkçülük</option><option>LGS İngilizce</option><option>LGS Din Kültürü</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="kitap-no" class="form-label">Kitap No</label>
+                            <select id="kitap-no" class="form-input">
+                               <option value="">Seçiniz</option><option>1. Kitap</option><option>2. Kitap</option><option>3. Kitap</option><option>4. Kitap</option><option>5. Kitap</option><option>6. Kitap</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="kitap-turu" class="form-label">Kitap Türü</label>
+                            <select id="kitap-turu" class="form-input">
+                                <option value="">Seçiniz</option><option>Konu Anlatım Kitabı</option><option>Ödev Kitabı</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="kitap-sayfa-no" class="form-label">Sayfa No</label>
+                            <input type="text" id="kitap-sayfa-no" class="form-input">
+                        </div>
+                        <div>
+                            <label for="kitap-hata-bildiren" class="form-label">Hata Bildiren</label>
+                            <input type="text" id="kitap-hata-bildiren" class="form-input">
+                        </div>
+                        <div class="relative">
+                            <label for="kitap-tarih" class="form-label">Tarih</label>
+                            <input type="date" id="kitap-tarih" class="form-input">
+                            <i class="fas fa-calendar absolute right-3 top-9 text-gray-400"></i>
+                        </div>
+                        <div>
+                            <label for="kitap-durumu" class="form-label">Durumu</label>
+                            <select id="kitap-durumu" class="form-input">
+                                <option>Bildirildi</option><option>İnceleniyor</option><option>Düzeltildi</option><option>Reddedildi</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2 lg:col-span-4">
+                            <label for="kitap-hata-icerigi" class="form-label">Hata İçeriği</label>
+                            <textarea id="kitap-hata-icerigi" rows="3" class="form-input" placeholder="Lütfen hatayı detaylı olarak açıklayınız..."></textarea>
+                        </div>
+                        <div class="md:col-span-2 lg:col-span-4">
+                            <label class="form-label">Görsel Ekle</label>
+                            <div class="mt-1 flex items-center">
+                                <label for="kitap-gorsel-input" class="cursor-pointer bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <span>Görsel Seç</span>
+                                    <input id="kitap-gorsel-input" type="file" class="sr-only" accept="image/*">
+                                </label>
+                                <div id="kitap-gorsel-preview-container" class="ml-4 relative hidden">
+                                    <img id="kitap-gorsel-preview" src="" alt="Görsel Önizleme" class="h-20 w-20 object-cover rounded-md">
+                                    <button id="kitap-gorsel-kaldir-btn" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-6">
+                        <button id="kitap-kaydet-btn" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors mr-2">Kaydet</button>
+                        <button id="kitap-iptal-btn" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 transition-colors">İptal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white shadow rounded-lg">
+                <div class="card-header" onclick="toggleCard('kitapDetay')">
+                    <h2><i class="fas fa-list-ul mr-2"></i>Kitap Hata Bildirim Listesi</h2>
+                    <i id="kitapDetay-icon" class="fas fa-chevron-down transition-transform"></i>
+                </div>
+                <div id="kitapDetay-body" class="p-5 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4 p-4 border rounded-lg bg-gray-50">
+                        <input type="text" id="kitap-filter-text" class="form-input" placeholder="Listede ara..." onkeyup="filterKitapTable(true)">
+                        <select id="kitap-filter-brans" class="form-input" onchange="filterKitapTable(true)">
+                            <option value="">Tüm Branşlar</option><option>LGS Türkçe</option><option>LGS Matematik</option><option>LGS Fen Bilimleri</option><option>LGS İnkılap Tarihi ve Atatürkçülük</option><option>LGS İngilizce</option><option>LGS Din Kültürü</option>
+                        </select>
+                        <select id="kitap-filter-kitap-turu" class="form-input" onchange="filterKitapTable(true)">
+                            <option value="">Tüm Kitap Türleri</option><option>Konu Anlatım Kitabı</option><option>Ödev Kitabı</option>
+                        </select>
+                        <select id="kitap-filter-durum" class="form-input" onchange="filterKitapTable(true)">
+                            <option value="">Tüm Durumlar</option><option>Bildirildi</option><option>İnceleniyor</option><option>Düzeltildi</option><option>Reddedildi</option>
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Görsel</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Branş</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kitap No</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kitap Türü</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hata Bildiren</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarih</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durumu</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kitap-hataTableBody" class="bg-white divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                    <div id="kitap-pagination-container" class="mt-4 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600">
+                        <span id="kitap-record-count" class="mb-2 sm:mb-0"></span>
+                        <div id="kitap-pagination-controls" class="flex items-center space-x-1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="relative bg-white p-2 rounded-lg max-w-4xl max-h-[90vh]">
+            <button id="close-image-modal-btn" class="absolute -top-4 -right-4 bg-white rounded-full h-8 w-8 text-black text-2xl flex items-center justify-center">&times;</button>
+            <img id="modal-image" src="" alt="Büyük Görsel" class="max-w-full max-h-[85vh] object-contain">
+        </div>
+    </div>
+
+    <div id="notification" class="fixed bottom-5 right-5 text-white py-2 px-5 rounded-lg shadow-lg hidden transition-opacity duration-300 z-50">
+        <p id="notification-message"></p>
+    </div>
+
     <script>
+        // --- HATA DÜZELTİLDİ ---
         const { createClient } = supabase;
         const supabaseUrl = 'https://ualousnlajygoiibyjny.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVhbG91c25sYWp5Z29paWJ5am55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc1OTMyNjIsImV4cCI6MjA3MzE2OTI2Mn0.RpfYW26AqAnl9RdFVxK_cnc8ADmZmtvqiNw6-XEmsoM';
         const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
-        // ... Diğer değişkenler
-        
+        // --- Genel Değişkenler ve Fonksiyonlar ---
+        let kitapHataData = [];
+        let videoHataData = [];
+        let secilenGorselDosyasi = null;
+        const itemsPerPage = 10;
+        let videoCurrentPage = 1;
+        let kitapCurrentPage = 1;
+
         async function verileriYukle() {
             // HATA DÜZELTİLDİ: Sıralama 'created_at' yerine 'id' ile yapılıyor.
             const { data: videoData, error: videoError } = await supabaseClient.from('video_hatalari').select('*').order('id', { ascending: false });
@@ -81,11 +449,10 @@
             if (kitapError) console.error('Kitap verileri yüklenemedi:', kitapError);
             else kitapHataData = kitapData;
         }
-
-        // ... Kodun geri kalanı öncekiyle aynı, bu yüzden kısa kesiyorum ...
-        // (Bu kod bloğu çok uzun olduğu için, sadece değişen kısmı gösterdim. 
-        //  Tam kod istersen bir önceki mesajdaki tam kodu kullanabilirsin, 
-        //  sadece bu verileriYukle fonksiyonunu değiştirmen yeterli)
+        
+        // ... (Kodun geri kalanı bir öncekiyle aynı, bu yüzden tüm fonksiyonları yeniden eklemiyorum)
+        // ... (Tüm fonksiyonların tam hali için önceki mesajdaki tam kodu kullanabilirsiniz)
+        
     </script>
 </body>
 </html>
