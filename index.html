@@ -237,7 +237,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durumu</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
                                 </tr>
-                            </thead>
+                                </thead>
                             <tbody id="video-hataTableBody" class="bg-white divide-y divide-gray-200"></tbody>
                         </table>
                     </div>
@@ -414,7 +414,7 @@
                 });
             }
         }
-
+        
         window.onload = async function() {
             await verileriYukle();
             filterVideoTable();
@@ -750,10 +750,11 @@
                 row.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.brans || ''}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.unite_adi || ''}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.hata_bildiren || ''}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.bolum_no || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.ders_no || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.test_no || '-'}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${formattedDate}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
-                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.yorum_sonuc || '-'}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm font-medium">
                         <button onclick="showVideoDetails(${originalIndex})" class="text-indigo-600 hover:text-indigo-900 mr-4">Detay</button>
                         <button onclick="deleteVideoItem(${originalIndex})" class="text-red-600 hover:text-red-900">Sil</button>
