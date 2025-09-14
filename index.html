@@ -233,11 +233,13 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bölüm No</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ders No</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Test No</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hata Süresi</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hata Alanı</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarih</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durumu</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
                                 </tr>
-                            </thead>
+                                </thead>
                             <tbody id="video-hataTableBody" class="bg-white divide-y divide-gray-200"></tbody>
                         </table>
                     </div>
@@ -783,7 +785,7 @@
             const tableBody = document.getElementById('video-hataTableBody');
             tableBody.innerHTML = '';
             if (paginatedData.length === 0) {
-                 tableBody.innerHTML = `<tr><td colspan="8" class="px-6 py-12 text-center text-gray-500">${videoHataData.length > 0 ? 'Filtre ile eşleşen kayıt bulunamadı!' : 'Hiç kayıt bulunmamaktadır!'}</td></tr>`;
+                 tableBody.innerHTML = `<tr><td colspan="10" class="px-6 py-12 text-center text-gray-500">${videoHataData.length > 0 ? 'Filtre ile eşleşen kayıt bulunamadı!' : 'Hiç kayıt bulunmamaktadır!'}</td></tr>`;
                  return;
             }
             paginatedData.forEach(item => {
@@ -804,6 +806,8 @@
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.bolum_no || '-'}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.ders_no || '-'}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.test_no || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.hata_suresi || '-'}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.hata_alani || '-'}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">${formattedDate}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs md:text-sm font-medium">
