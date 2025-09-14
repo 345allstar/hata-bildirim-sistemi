@@ -237,7 +237,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durumu</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">İşlemler</th>
                                 </tr>
-                                </thead>
+                            </thead>
                             <tbody id="video-hataTableBody" class="bg-white divide-y divide-gray-200"></tbody>
                         </table>
                     </div>
@@ -392,6 +392,45 @@
         const itemsPerPage = 10;
         let videoCurrentPage = 1;
         let kitapCurrentPage = 1;
+
+        // --- YENİ YARDIMCI FONKSİYON: Akıllı sayfa numarası listesi oluşturur ---
+        function getPaginationNumbers(currentPage, totalPages) {
+            const pageNeighbours = 1; 
+            const totalNumbers = (pageNeighbours * 2) + 3;
+            const totalBlocks = totalNumbers + 2;
+
+            if (totalPages > totalBlocks) {
+                const startPage = Math.max(2, currentPage - pageNeighbours);
+                const endPage = Math.min(totalPages - 1, currentPage + pageNeighbours);
+                let pages = Array.from({ length: (endPage - startPage) + 1 }, (_, i) => startPage + i);
+
+                const hasLeftSpill = startPage > 2;
+                const hasRightSpill = (totalPages - endPage) > 1;
+                const spillOffset = totalNumbers - (pages.length + 1);
+
+                switch (true) {
+                    case (hasLeftSpill && !hasRightSpill): {
+                        const extraPages = Array.from({ length: spillOffset + 1 }, (_, i) => startPage - 1 - i).reverse();
+                        pages = [...extraPages, ...pages];
+                        break;
+                    }
+                    case (!hasLeftSpill && hasRightSpill): {
+                        const extraPages = Array.from({ length: spillOffset + 1 }, (_, i) => endPage + 1 + i);
+                        pages = [...pages, ...extraPages];
+                        break;
+                    }
+                }
+                
+                let finalPages = [1];
+                if(hasLeftSpill) finalPages.push('...');
+                finalPages = [...finalPages, ...pages];
+                if(hasRightSpill) finalPages.push('...');
+                finalPages.push(totalPages);
+                return finalPages;
+            }
+
+            return Array.from({ length: totalPages }, (_, i) => i + 1);
+        }
 
         async function verileriYukle() {
             const { data: videoData, error: videoError } = await supabaseClient.from('video_hatalari').select('*').order('id', { ascending: false });
@@ -704,19 +743,31 @@
             const controlsContainer = document.getElementById('video-pagination-controls');
             controlsContainer.innerHTML = '';
             if (totalPages <= 1) return;
+
+            const pages = getPaginationNumbers(videoCurrentPage, totalPages);
+
             const prevButton = document.createElement('button');
             prevButton.innerHTML = '&laquo;';
             prevButton.className = 'pagination-btn';
             prevButton.disabled = videoCurrentPage === 1;
             prevButton.onclick = () => { changeVideoPage(videoCurrentPage - 1); };
             controlsContainer.appendChild(prevButton);
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.textContent = i;
-                pageButton.className = 'pagination-btn' + (i === videoCurrentPage ? ' active' : '');
-                pageButton.onclick = () => { changeVideoPage(i); };
-                controlsContainer.appendChild(pageButton);
-            }
+            
+            pages.forEach(page => {
+                if (page === '...') {
+                    const separator = document.createElement('span');
+                    separator.className = 'px-4 py-2';
+                    separator.textContent = '...';
+                    controlsContainer.appendChild(separator);
+                } else {
+                    const pageButton = document.createElement('button');
+                    pageButton.textContent = page;
+                    pageButton.className = 'pagination-btn' + (page === videoCurrentPage ? ' active' : '');
+                    pageButton.onclick = () => { changeVideoPage(page); };
+                    controlsContainer.appendChild(pageButton);
+                }
+            });
+
             const nextButton = document.createElement('button');
             nextButton.innerHTML = '&raquo;';
             nextButton.className = 'pagination-btn';
@@ -762,17 +813,7 @@
                 tableBody.appendChild(row);
             });
         }
-        function populateSelectWithOptions(selectElementId, optionsArray) {
-            const selectElement = document.getElementById(selectElementId);
-            if (selectElement.options.length <= 1) { 
-                optionsArray.forEach(optionText => {
-                    const option = document.createElement('option');
-                    option.value = optionText;
-                    option.textContent = optionText;
-                    selectElement.appendChild(option);
-                });
-            }
-        }
+        
         function filterSelectOptions(inputId, selectId) {
             const filter = document.getElementById(inputId).value.toLowerCase();
             const options = document.getElementById(selectId).getElementsByTagName('option');
@@ -841,19 +882,31 @@
             const controlsContainer = document.getElementById('kitap-pagination-controls');
             controlsContainer.innerHTML = '';
             if (totalPages <= 1) return;
+
+            const pages = getPaginationNumbers(kitapCurrentPage, totalPages);
+            
             const prevButton = document.createElement('button');
             prevButton.innerHTML = '&laquo;';
             prevButton.className = 'pagination-btn';
             prevButton.disabled = kitapCurrentPage === 1;
             prevButton.onclick = () => { changeKitapPage(kitapCurrentPage - 1); };
             controlsContainer.appendChild(prevButton);
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.textContent = i;
-                pageButton.className = 'pagination-btn' + (i === kitapCurrentPage ? ' active' : '');
-                pageButton.onclick = () => { changeKitapPage(i); };
-                controlsContainer.appendChild(pageButton);
-            }
+            
+            pages.forEach(page => {
+                 if (page === '...') {
+                    const separator = document.createElement('span');
+                    separator.className = 'px-4 py-2';
+                    separator.textContent = '...';
+                    controlsContainer.appendChild(separator);
+                } else {
+                    const pageButton = document.createElement('button');
+                    pageButton.textContent = page;
+                    pageButton.className = 'pagination-btn' + (page === kitapCurrentPage ? ' active' : '');
+                    pageButton.onclick = () => { changeKitapPage(page); };
+                    controlsContainer.appendChild(pageButton);
+                }
+            });
+            
             const nextButton = document.createElement('button');
             nextButton.innerHTML = '&raquo;';
             nextButton.className = 'pagination-btn';
