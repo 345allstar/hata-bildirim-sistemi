@@ -103,7 +103,7 @@
                                  <option value="">Seçiniz</option>
                             </select>
                         </div>
-                         <div>
+                        <div>
                             <label for="video-ogretmen" class="form-label">Öğretmen</label>
                              <select id="video-ogretmen" class="form-input">
                                 <option value="">Seçiniz</option>
@@ -157,7 +157,7 @@
                             <input type="date" id="video-tarih" class="form-input">
                             <i class="fas fa-calendar absolute right-3 top-9 text-gray-400"></i>
                         </div>
-                         <div>
+                        <div>
                             <label for="video-durumu" class="form-label">Durumu</label>
                             <select id="video-durumu" class="form-input">
                                 <option>Bildirildi</option><option>İnceleniyor</option><option>Düzeltildi</option><option>Reddedildi</option>
@@ -173,7 +173,7 @@
                                 <option value="">Seçiniz</option><option>Akademik</option><option>Teknik</option>
                             </select>
                         </div>
-                         <div class="md:col-span-2 lg:col-span-4">
+                        <div class="md:col-span-2 lg:col-span-4">
                             <label for="video-hata-icerigi" class="form-label">Hata İçeriği</label>
                             <textarea id="video-hata-icerigi" rows="3" class="form-input" placeholder="Lütfen hatayı detaylı olarak açıklayınız..."></textarea>
                         </div>
@@ -395,7 +395,18 @@
         let videoCurrentPage = 1;
         let kitapCurrentPage = 1;
 
-        // --- YENİ YARDIMCI FONKSİYON: Akıllı sayfa numarası listesi oluşturur ---
+        function getBransRowColor(brans) {
+            const renkler = {
+                'LGS Türkçe': '#f3ceed',
+                'LGS Matematik': '#b2e4f8',
+                'LGS Fen Bilimleri': '#b4ffbd',
+                'LGS İnkılap Tarihi ve Atatürkçülük': '#ffffa0',
+                'LGS İngilizce': '#f9c3b3',
+                'LGS Din Kültürü': '#fde6b1'
+            };
+            return renkler[brans] || ''; 
+        }
+
         function getPaginationNumbers(currentPage, totalPages) {
             const pageNeighbours = 1; 
             const totalNumbers = (pageNeighbours * 2) + 3;
@@ -795,6 +806,10 @@
             paginatedData.forEach(item => {
                 const originalIndex = videoHataData.findIndex(originalItem => originalItem.id === item.id);
                 const row = document.createElement('tr');
+                const rowColor = getBransRowColor(item.brans);
+                if (rowColor) {
+                    row.style.backgroundColor = rowColor;
+                }
                 let formattedDate = "Tarih Girilmemiş";
                 if(item.tarih) {
                     const dateParts = item.tarih.split('-');
@@ -940,6 +955,10 @@
             paginatedData.forEach(item => {
                 const originalIndex = kitapHataData.findIndex(originalItem => originalItem.id === item.id);
                 const row = document.createElement('tr');
+                const rowColor = getBransRowColor(item.brans);
+                if (rowColor) {
+                    row.style.backgroundColor = rowColor;
+                }
                 let formattedDate = item.tarih ? `${item.tarih.split('-')[2]}-${item.tarih.split('-')[1]}-${item.tarih.split('-')[0]}` : "Tarih Girilmemiş";
                 let gorselCell = '<td class="px-4 py-4 whitespace-nowrap text-xs md:text-sm text-gray-500">-</td>';
                 if(item.gorsel){
