@@ -776,7 +776,7 @@
                 } else {
                     const pageButton = document.createElement('button');
                     pageButton.textContent = page;
-                    pageButton.className = 'pagination-btn' + (i === videoCurrentPage ? ' active' : '');
+                    pageButton.className = 'pagination-btn' + (page === videoCurrentPage ? ' active' : '');
                     pageButton.onclick = () => { changeVideoPage(page); };
                     controlsContainer.appendChild(pageButton);
                 }
