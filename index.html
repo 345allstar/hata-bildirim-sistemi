@@ -30,7 +30,7 @@
         <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <img src="https://placehold.co/250x60/f8f9fa/0A2C6E?text=ÜçDörtBeş+ALL+STAR&font=inter" alt="All Star Logo" class="h-10">
+                    <img src="logo.png" alt="All Star Logo" class="h-12">
                 </div>
                 <div class="flex items-center">
                     <button class="p-2 rounded-full text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -817,17 +817,17 @@
                     }
                 }
                 row.innerHTML = `
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.brans || ''}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.unite_adi || ''}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.ogretmen || '-'}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.bolum_no || '-'}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.ders_no || '-'}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.test_no || '-'}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.hata_suresi || '-'}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.hata_alani || '-'}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${formattedDate}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm font-medium">
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-800 border-b border-r border-gray-200">${item.brans || ''}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.unite_adi || ''}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.ogretmen || '-'}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.bolum_no || '-'}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.ders_no || '-'}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.test_no || '-'}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.hata_suresi || '-'}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.hata_alani || '-'}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${formattedDate}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm border-b border-r border-gray-200"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm font-medium border-b border-gray-200">
                         <button onclick="showVideoDetails(${originalIndex})" class="text-indigo-600 hover:text-indigo-900 mr-2">Detay</button>
                         <button onclick="deleteVideoItem(${originalIndex})" class="text-red-600 hover:text-red-900">Sil</button>
                     </td>`;
