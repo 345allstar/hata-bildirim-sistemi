@@ -399,12 +399,12 @@
         // --- Yardımcı Fonksiyonlar ---
         function getBransRowColor(brans) {
             const renkler = {
-                'LGS Türkçe': '#f3ceed',
-                'LGS Matematik': '#b2e4f8',
-                'LGS Fen Bilimleri': '#b4ffbd',
-                'LGS İnkılap Tarihi ve Atatürkçülük': '#ffffa0',
-                'LGS İngilizce': '#f9c3b3',
-                'LGS Din Kültürü': '#fde6b1'
+                'LGS Türkçe': '#F8E8F6',
+                'LGS Matematik': '#E1F5FE',
+                'LGS Fen Bilimleri': '#E6FFEC',
+                'LGS İnkılap Tarihi ve Atatürkçülük': '#FFFDE7',
+                'LGS İngilizce': '#FFEAE3',
+                'LGS Din Kültürü': '#FFF8E1'
             };
             return renkler[brans] || ''; 
         }
@@ -958,19 +958,19 @@
                     row.style.backgroundColor = rowColor;
                 }
                 let formattedDate = item.tarih ? `${item.tarih.split('-')[2]}-${item.tarih.split('-')[1]}-${item.tarih.split('-')[0]}` : "Tarih Girilmemiş";
-                let gorselCell = '<td class="px-2 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">-</td>';
+                let gorselCell = '<td class="px-2 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">-</td>';
                 if(item.gorsel){
-                    gorselCell = `<td class="px-2 py-2"><img src="${item.gorsel}" alt="hata görseli" class="h-10 w-10 object-cover rounded cursor-pointer" onclick="openImageModal('${item.gorsel}')"></td>`;
+                    gorselCell = `<td class="px-2 py-2 border-b border-r border-gray-200"><img src="${item.gorsel}" alt="hata görseli" class="h-10 w-10 object-cover rounded cursor-pointer" onclick="openImageModal('${item.gorsel}')"></td>`;
                 }
                 row.innerHTML = `
                     ${gorselCell}
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.brans || ''}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.kitap_no || ''}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${item.kitap_turu || ''}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-800">${item.hata_bildiren || ''}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500">${formattedDate}</td>
-                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
-                    <td class="px-3 py-2 whitespace-nowrap text-sm font-medium">
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-800 border-b border-r border-gray-200">${item.brans || ''}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.kitap_no || ''}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${item.kitap_turu || ''}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-800 border-b border-r border-gray-200">${item.hata_bildiren || ''}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm text-gray-500 border-b border-r border-gray-200">${formattedDate}</td>
+                    <td class="px-3 py-2 whitespace-nowrap text-xs md:text-sm border-b border-r border-gray-200"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusClass(item.durumu)}">${item.durumu || ''}</span></td>
+                    <td class="px-3 py-2 whitespace-nowrap text-sm font-medium border-b border-gray-200">
                         <button onclick="showKitapDetails(${originalIndex})" class="text-indigo-600 hover:text-indigo-900 mr-2">Detay</button>
                         <button onclick="deleteKitapItem(${originalIndex})" class="text-red-600 hover:text-red-900">Sil</button>
                     </td>`;
